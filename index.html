@@ -3,84 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fonstage | 唯美主页</title>
+    <title>Fonstage | 樱花季</title>
     <!-- 引入谷歌字体：Noto Serif (宋体/明朝体) -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* 全局样式 */
+        /* --- 全局背景设定 --- */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Noto Serif SC', serif;
-            /* 核心修改：梦幻极光渐变背景 (淡紫 -> 粉红) */
-            background: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+            /* 核心修改：浅粉色渐变，模仿晨曦和樱花 */
+            background: linear-gradient(135deg, #fff0f5 0%, #ffdee9 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #4a4a4a;
+            color: #5d4037; /* 深棕色文字，比纯黑更柔和 */
+            overflow: hidden; /* 防止樱花飘出屏幕出现滚动条 */
+            position: relative;
         }
 
-        /* 磨砂玻璃卡片容器 */
+        /* --- 磨砂玻璃卡片 --- */
         .container {
-            /* 更加通透的玻璃效果，适配纯净背景 */
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            /* 稍微调高一点不透明度，增加一种“白瓷”的质感 */
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 40px 30px;
-            border-radius: 20px;
+            border-radius: 24px; /* 更圆润的边角 */
             width: 85%;
             max-width: 400px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            /* 阴影改为淡淡的粉色光晕 */
+            box-shadow: 0 10px 40px -10px rgba(255, 183, 197, 0.5);
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            animation: fadeIn 1.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            z-index: 10; /* 保证卡片在樱花上面 */
+            position: relative;
         }
 
-        /* 标题样式 */
+        /* --- 文字样式 --- */
         h1 {
             font-weight: 700;
-            color: #d65db1; /* 标题保持樱花粉，与背景呼应 */
+            color: #d65db1;
             margin-bottom: 10px;
             letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
         }
 
         p.subtitle {
             font-size: 0.9rem;
-            color: #666;
+            color: #8c7b75;
             margin-bottom: 30px;
-            border-bottom: 1px dashed #ccaadd;
+            border-bottom: 1px dashed #ebb1cd; /* 分割线改成粉色虚线 */
             padding-bottom: 15px;
             display: inline-block;
         }
 
-        /* 工具卡片样式 */
+        /* --- 工具列表卡片 --- */
         .tool-card {
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 12px;
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 18px;
             margin-top: 15px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            border: 1px solid transparent;
         }
 
         .tool-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px) scale(1.02);
             background: #fff;
-            box-shadow: 0 5px 15px rgba(214, 93, 177, 0.2);
+            box-shadow: 0 8px 20px rgba(233, 171, 188, 0.3);
+            border-color: #ffd1dc;
         }
 
         .tool-title {
             font-weight: bold;
             font-size: 1.1rem;
             margin-bottom: 5px;
-            color: #333;
+            color: #4a4a4a;
         }
         
         .tool-desc {
             font-size: 0.85rem;
-            color: #888;
+            color: #999;
         }
+
+        /* --- 🌸 樱花特效样式 --- */
+        .sakura {
+            position: absolute;
+            background-color: #ffd1dc; /* 花瓣颜色 */
+            /* 用 CSS 画一个不规则的花瓣形状 */
+            border-radius: 100% 0% 100% 0%; 
+            opacity: 0.8;
+            pointer-events: none; /* 让花瓣不影响点击 */
+            z-index: 1; /* 在背景之上，但在卡片之下 */
+            animation: fall linear infinite;
+        }
+
+        /* 定义飘落动画 */
+        @keyframes fall {
+            0% {
+                opacity: 0;
+                transform: translate(0, -10vh) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                /* 飘落到底部，并且横向移动，模拟风吹 */
+                transform: translate(100px, 110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 动态樱花容器 -->
+    <div id="sakura-container"></div>
+
+    <div class="container">
+        <h1>Fonstage</h1>
+        <p class="subtitle">花信风 · 记录美好</p>
+
+        <!-- 工具列表 -->
+        <div class="tool-card">
+            <div class="tool-title">🔨 预留位 </div>
+            <div class="tool-desc">猜猜我会放什么？...</div>
+        </div>
+
+        <div class="tool-card">
+            <div class="tool-title">📅 日历</div>
+            <div class="tool-desc">记录每一个重要的日子</div>
+        </div>
+    </div>
+
+    <!-- 🌸 樱花生成脚本 -->
+    <script>
+        function createSakura() {
+            const container = document.body;
+            const sakura = document.createElement('div');
+            sakura.classList.add('sakura');
+
+            // 随机大小 (10px - 20px)
+            const size = Math.random() * 10 + 10 + 'px';
+            sakura.style.width = size;
+            sakura.style.height = size;
+
+            // 随机水平位置 (0% - 100%)
+            sakura.style.left = Math.random() * 100 + 'vw';
+
+            // 随机动画时长 (5s - 10s)，制造快慢不一的感觉
+            sakura.style.animationDuration = Math.random() * 5 + 5 + 's';
+
+            // 随机延迟开始
+            sakura.style.animationDelay = Math.random() * 2 + 's';
+
+            container.appendChild(sakura);
+
+            // 动画结束后删除元素，防止手机卡顿
+            setTimeout(() => {
+                sakura.remove();
+            }, 10000); // 配合动画时长
+        }
+
+        // 每 400 毫秒生成一片花瓣
+        setInterval(createSakura, 400);
+    </script>
+</body>
+</html>
 
         /* 动画 */
         @keyframes fadeIn {
