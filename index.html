@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fonstage | 樱花季</title>
@@ -179,43 +176,6 @@
 
         // 启动生成 (稍微加快一点生成频率，让效果更明显)
         setInterval(createSakura, 300);
-    </script>
-</body>
-</html>
-
-    <div class="container">
-        <h1>Fonstage</h1>
-        <p class="subtitle">花信风 · 记录美好</p>
-
-        <!-- 工具 1：DeepSeek -->
-        <a href="https://chat.deepseek.com" target="_blank" class="tool-card">
-            <div class="tool-title">🐋 呼叫 DeepSeek</div>
-            <div class="tool-desc">全能 AI 助手 · 点击跳转</div>
-        </a>
-
-        <!-- 工具 2：日历 -->
-        <div class="tool-card">
-            <div class="tool-title">📅 赏樱日历</div>
-            <div class="tool-desc">记录每一个重要的日子</div>
-        </div>
-    </div>
-
-    <!-- 🌸 樱花生成脚本 -->
-    <script>
-        function createSakura() {
-            const container = document.body;
-            const sakura = document.createElement('div');
-            sakura.classList.add('sakura');
-            const size = Math.random() * 10 + 10 + 'px';
-            sakura.style.width = size;
-            sakura.style.height = size;
-            sakura.style.left = Math.random() * 100 + 'vw';
-            sakura.style.animationDuration = Math.random() * 5 + 5 + 's';
-            sakura.style.animationDelay = Math.random() * 2 + 's';
-            container.appendChild(sakura);
-            setTimeout(() => { sakura.remove(); }, 10000);
-        }
-        setInterval(createSakura, 400);
     </script>
 </body>
 </html>
