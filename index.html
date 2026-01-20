@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fonstage | 樱花季</title>
@@ -19,7 +22,7 @@
             justify-content: center;
             align-items: center;
             color: #5d4037;
-            overflow: hidden; /* 隐藏滚动条 */
+            overflow: hidden; 
             position: relative;
         }
 
@@ -35,7 +38,7 @@
             box-shadow: 0 10px 40px -10px rgba(255, 183, 197, 0.5);
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.6);
-            /* 层级设为 10，让它浮在背景上，但在花瓣下面 */
+            /* 保持卡片在背景之上，但在花瓣下面 */
             z-index: 10; 
             position: relative;
         }
@@ -98,28 +101,87 @@
 
         /* --- 🌸 樱花特效样式 (关键修改) --- */
         .sakura {
-            position: fixed; /* 改为 fixed，确保相对于整个屏幕定位 */
+            position: fixed; 
+            /* 关键修改1：强制让花瓣出生在屏幕顶部上方 50px 的位置 */
+            /* 这样它们生成时是不可见的，只有飘下来时才会被看到 */
+            top: -50px; 
             background-color: #ffd1dc;
             border-radius: 100% 0% 100% 0%; 
-            opacity: 0.8;
-            /* 关键修改：z-index 设为 100 */
-            /* 只要比 .container 的 10 大，花瓣就会飘在卡片上面 */
-            z-index: 100; 
-            pointer-events: none; /* 必须保留！这让点击可以直接穿透花瓣点到按钮 */
+            opacity: 0; /* 初始透明 */
+            z-index: 100; /* 浮在最上层 */
+            pointer-events: none; /* 允许点击穿透 */
             animation: fall linear infinite;
         }
 
+        /* 关键修改2：优化下落动画轨迹 */
         @keyframes fall {
-            0% { opacity: 0; transform: translate(0, -10vh) rotate(0deg); }
-            10% { opacity: 1; }
-            100% { opacity: 0; transform: translate(100px, 110vh) rotate(360deg); }
+            0% {
+                opacity: 0;
+                /* 从原点（即屏幕上方 -50px）开始 */
+                transform: translateY(0) rotate(0deg);
+            }
+            10% {
+                opacity: 0.9; /* 飘入屏幕一点点后才显示，避免突兀 */
+            }
+            100% {
+                opacity: 0;
+                /* 这里的 110vh 保证花瓣能飘过整个屏幕的高度 */
+                transform: translateY(110vh) translateX(50px) rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 动态樱花容器 -->
-    <div id="sakura-container"></div>
+    <div class="container">
+        <h1>Fonstage</h1>
+        <p class="subtitle">花信风 · 记录美好</p>
+
+        <!-- 工具 1：DeepSeek -->
+        <a href="https://chat.deepseek.com" target="_blank" class="tool-card">
+            <div class="tool-title">🐋 呼叫 DeepSeek</div>
+            <div class="tool-desc">全能 AI 助手 · 点击跳转</div>
+        </a>
+
+        <!-- 工具 2：日历 -->
+        <div class="tool-card">
+            <div class="tool-title">📅 赏樱日历</div>
+            <div class="tool-desc">记录每一个重要的日子</div>
+        </div>
+    </div>
+
+    <!-- 🌸 樱花生成脚本 -->
+    <script>
+        function createSakura() {
+            const container = document.body;
+            const sakura = document.createElement('div');
+            sakura.classList.add('sakura');
+            
+            // 随机大小
+            const size = Math.random() * 10 + 10 + 'px';
+            sakura.style.width = size;
+            sakura.style.height = size;
+            
+            // 随机水平位置
+            sakura.style.left = Math.random() * 100 + 'vw';
+            
+            // 随机动画时长 (飘慢一点更唯美，改为 6-12秒)
+            sakura.style.animationDuration = Math.random() * 6 + 6 + 's';
+            
+            // 随机延迟 (让花瓣不要同时出来)
+            sakura.style.animationDelay = Math.random() * 1 + 's';
+            
+            container.appendChild(sakura);
+            
+            // 清理
+            setTimeout(() => { sakura.remove(); }, 12000);
+        }
+
+        // 启动生成 (稍微加快一点生成频率，让效果更明显)
+        setInterval(createSakura, 300);
+    </script>
+</body>
+</html>
 
     <div class="container">
         <h1>Fonstage</h1>
