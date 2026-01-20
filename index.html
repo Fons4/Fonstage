@@ -1,18 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <title>Fonstage</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonstage | 唯美主页</title>
+    <!-- 引入谷歌字体：Noto Serif (宋体/明朝体) 更有日式感觉 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; padding: 20px; }
-        .card { border: 1px solid #ddd; padding: 10px; margin-top: 10px; border-radius: 8px;}
+        /* 全局样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Serif SC', serif; /* 使用宋体 */
+            /* 背景图：这里用了一张在线的樱花图，你可以以后换成自己的 */
+            background: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1080&q=80') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #4a4a4a;
+        }
+
+        /* 磨砂玻璃卡片容器 */
+        .container {
+            background: rgba(255, 255, 255, 0.75); /* 白色背景，75%不透明度 */
+            backdrop-filter: blur(10px); /* 关键：背景模糊效果 */
+            -webkit-backdrop-filter: blur(10px); /* 兼容苹果手机 */
+            padding: 40px 30px;
+            border-radius: 20px;
+            width: 85%;
+            max-width: 400px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); /* 柔和阴影 */
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            animation: fadeIn 1.5s ease; /* 淡入动画 */
+        }
+
+        /* 标题样式 */
+        h1 {
+            font-weight: 700;
+            color: #d65db1; /* 樱花粉色标题 */
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        p.subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #ccaadd;
+            padding-bottom: 15px;
+            display: inline-block;
+        }
+
+        /* 工具卡片样式 */
+        .tool-card {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px); /* 悬浮上浮 */
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(214, 93, 177, 0.2);
+        }
+
+        .tool-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .tool-desc {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* 简单的淡入动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <h1>欢迎来到Fonstage</h1>
-    <div class="card">
-        <h3>工具预留位 1</h3>
-        <p>这里以后放计算器...</p>
+
+    <div class="container">
+        <h1>Fonstage</h1>
+        <p class="subtitle">记录生活 · 收集灵感</p>
+
+        <!-- 工具列表 -->
+        <div class="tool-card">
+            <div class="tool-title">🔨 工具预留位 1</div>
+            <div class="tool-desc">这里以后放计算器...</div>
+        </div>
+
+        <div class="tool-card">
+            <div class="tool-title">📅 日式日历</div>
+            <div class="tool-desc">开发中...</div>
+        </div>
     </div>
+
 </body>
 </html>
