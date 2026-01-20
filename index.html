@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fonstage | 唯美主页</title>
-    <!-- 引入谷歌字体：Noto Serif (宋体/明朝体) 更有日式感觉 -->
+    <!-- 引入谷歌字体：Noto Serif (宋体/明朝体) -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* 全局样式 */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Noto Serif SC', serif; /* 使用宋体 */
-            /* 背景图：这里用了一张在线的樱花图，你可以以后换成自己的 */
-            background: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1080&q=80') no-repeat center center fixed;
-            background-size: cover;
+            font-family: 'Noto Serif SC', serif;
+            /* 核心修改：梦幻极光渐变背景 (淡紫 -> 粉红) */
+            background: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,23 +23,24 @@
 
         /* 磨砂玻璃卡片容器 */
         .container {
-            background: rgba(255, 255, 255, 0.75); /* 白色背景，75%不透明度 */
-            backdrop-filter: blur(10px); /* 关键：背景模糊效果 */
-            -webkit-backdrop-filter: blur(10px); /* 兼容苹果手机 */
+            /* 更加通透的玻璃效果，适配纯净背景 */
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 40px 30px;
             border-radius: 20px;
             width: 85%;
             max-width: 400px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); /* 柔和阴影 */
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.4);
-            animation: fadeIn 1.5s ease; /* 淡入动画 */
+            animation: fadeIn 1.5s ease;
         }
 
         /* 标题样式 */
         h1 {
             font-weight: 700;
-            color: #d65db1; /* 樱花粉色标题 */
+            color: #d65db1; /* 标题保持樱花粉，与背景呼应 */
             margin-bottom: 10px;
             letter-spacing: 2px;
         }
@@ -65,7 +65,7 @@
         }
 
         .tool-card:hover {
-            transform: translateY(-5px); /* 悬浮上浮 */
+            transform: translateY(-5px);
             background: #fff;
             box-shadow: 0 5px 15px rgba(214, 93, 177, 0.2);
         }
@@ -82,7 +82,7 @@
             color: #888;
         }
 
-        /* 简单的淡入动画 */
+        /* 动画 */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
